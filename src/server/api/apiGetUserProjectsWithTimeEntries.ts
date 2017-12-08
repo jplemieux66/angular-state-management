@@ -28,10 +28,17 @@ export function apiGetUserProjectsWithTimeEntries(app: Application) {
       timeEntries = timeEntries.concat(projectTimeEntries);
     });
 
+    // Get the other users on projects
+    const projectsUserIds: number[] = _.uniq(projects.map(project => project.userIds)
+                                                   .reduce((a, b) => a.concat(b)));
+
+    const projectsUsers: User[] = _.filter(dbUsers, user => projectsUserIds.includes(userId));
+
     const response: UserProjectsDetails = {
       user,
       projects,
-      timeEntries
+      timeEntries,
+      projectsUsers
     }
 
     res.status(200).json(response);
