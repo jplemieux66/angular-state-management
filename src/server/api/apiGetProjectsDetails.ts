@@ -8,7 +8,7 @@ import { ProjectsDetails } from '../../shared/model/user-projects-details';
 
 export function apiGetProjectsDetails(app: Application) {
   app.route('/api/projects').get((req: Request, res: Response) => {
-    const userId = 1;
+    const userId = parseInt(req.headers['userid']);
     
     // Get the projects info associated with the user from the db
     const projects: Project[] = _.filter(dbProjects, project => project.userIds.includes(userId));
