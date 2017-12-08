@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectsModule } from './projects/projects.module';
+import { DatesModule } from './dates/dates.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ProjectsModule } from './projects/projects.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ProjectsModule
+    ProjectsModule,
+    DatesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

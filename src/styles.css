@@ -5,3 +5,12 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+/* Angular Material Component styles */
+.mat-input-infix {
+  width: 0 !important;
+}
+
+.mat-input-underline {
+  display:none;
+}

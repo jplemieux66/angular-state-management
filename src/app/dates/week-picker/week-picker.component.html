@@ -1,0 +1,9 @@
+<mat-form-field>
+  <input matInput [matDatepickerFilter]="firstWeekDayOnlyFilter" 
+         [matDatepicker]="weekPicker" 
+         placeholder="Choose a date" 
+         (dateChange)="onDateChange($event)">
+  <mat-datepicker-toggle matSuffix [for]="weekPicker"></mat-datepicker-toggle>
+  <mat-datepicker #weekPicker></mat-datepicker>
+</mat-form-field>
+<span class="current-week-display">{{ currentWeekDisplay }}</span>
