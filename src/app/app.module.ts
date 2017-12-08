@@ -8,7 +8,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectsModule } from './projects/projects.module';
 import { DatesModule } from './dates/dates.module';
-
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './reducers';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { DatesModule } from './dates/dates.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    StoreModule.forRoot(reducers),
     ProjectsModule,
     DatesModule
   ],

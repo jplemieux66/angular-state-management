@@ -9,7 +9,7 @@ export interface State {
 export const initialState: State = {
   selectedWeekInfo: {
     startDate: moment().weekday(0),
-    endDate: moment().weekday(1)
+    endDate: moment().weekday(6)
   }
 }
 
