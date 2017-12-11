@@ -1,6 +1,6 @@
 import * as moment from 'moment';
-import { WeekInfo } from '../dates/week-info.model';
 import * as date from '../actions/date';
+import { WeekInfo } from './../../../shared/model/week-info.model';
 
 export interface State {
   selectedWeekInfo: WeekInfo;

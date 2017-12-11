@@ -1,9 +1,9 @@
 import { Component, OnChanges, EventEmitter, Output } from '@angular/core';
 import { Moment } from 'moment';
 import { MatDatepickerInputEvent } from '@angular/material';
-import { WeekInfo } from '../week-info.model';
 import { Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { WeekInfo } from '../../../../shared/model/week-info.model';
 
 @Component({
   selector: 'week-picker',

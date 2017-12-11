@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectsModule } from './projects/projects.module';
-import { DatesModule } from './dates/dates.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -22,8 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    ProjectsModule,
-    DatesModule
+    EffectsModule.forRoot([]),
+    ProjectsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
