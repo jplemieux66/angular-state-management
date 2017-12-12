@@ -65,7 +65,12 @@ export const getTimeEntries = createSelector(
 /* Combined Selectors */
 
 const filterTimeEntriesForWeek = (timeEntries: TimeEntry[], weekInfo: WeekInfo) => {
-  return _.filter(timeEntries, (timeEntry: TimeEntry) => timeEntry.date >= weekInfo.startDate.toDate() && timeEntry.date <= weekInfo.endDate.toDate());
+  return _.filter(timeEntries, (timeEntry: TimeEntry) => {
+    const startDate = weekInfo.startDate.toDate();
+    const endDate = weekInfo.endDate.toDate();
+    const timeEntryDate = new Date(timeEntry.date);
+    return timeEntryDate >= startDate && timeEntryDate <= endDate
+  });
 }
 
 export const getFilteredTimeEntriesForWeek = createSelector(
