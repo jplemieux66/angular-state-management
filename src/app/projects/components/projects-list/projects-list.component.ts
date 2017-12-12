@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { ProjectViewModel } from '../../view-models/project.vm';
 
 @Component({
   selector: 'projects-list',
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.css']
 })
-export class ProjectsListComponent implements OnInit {
-  projects = [
-    { name: "test 1" },
-    { name: "test 2" }
-  ]
+export class ProjectsListComponent {
+  @Input() projects: ProjectViewModel[];
 
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

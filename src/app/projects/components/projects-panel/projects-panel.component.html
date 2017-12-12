@@ -1,5 +1,10 @@
-<week-picker 
-  (onWeekSelectedChanged)="weekSelectedChanged($event)"
-  [currentlySelectedWeek]="selectedWeekInfo$ | async">
-</week-picker>
-<projects-list></projects-list>
+<div class="container">
+  <h1>Projects</h1>
+  <week-picker 
+    (onWeekSelectedChanged)="weekSelectedChanged($event)"
+    [currentlySelectedWeek]="selectedWeekInfo$ | async">
+  </week-picker>
+  <projects-list
+    [projects]="projectViewModels$ | async">
+  </projects-list>
+</div>
