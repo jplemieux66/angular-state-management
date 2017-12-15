@@ -10,6 +10,8 @@ import { WeekInfo } from "../../../shared/model/week-info.model";
 import { memoize } from "@ngrx/store/src/selector";
 import { User } from "../../../shared/model/user";
 import { ProjectViewModel } from "../view-models/project.vm";
+import * as moment from 'moment';
+import { TimeEntryViewModel } from "../view-models/time-entry.vm";
 
 
 export interface ProjectsState {
@@ -84,6 +86,17 @@ const filterTimeEntriesForProject = (timeEntries: TimeEntry[], project: Project)
                   (timeEntry: TimeEntry) => timeEntry.projectId == project.id);
 }
 
+const mapTimeEntryToTimeEntryViewModel = (timeEntry: TimeEntry) => {
+  return { 
+    date: moment(new Date(timeEntry.date)),
+    time: timeEntry.time
+  }
+}
+
+const mapTimeEntriesToTimeEntryViewModels = (timeEntries: TimeEntry[]) => {
+  return _.map(timeEntries, mapTimeEntryToTimeEntryViewModel);
+}
+
 const filterUsersForProject = (users: User[], project: Project) => {
   return _.filter(users, 
                   (user: User) => project.userIds.includes(user.id));
@@ -126,7 +139,7 @@ const mapProjectToProjectViewModel =
     const projectViewModel: ProjectViewModel = {
       name: getProjectName(project),
       userNames: getUserNames(projectUsers),
-      weeklyTimeEntries,
+      weeklyTimeEntries: mapTimeEntriesToTimeEntryViewModels(weeklyTimeEntries),
       weeklyTotalTime: calcTimeEntriesTotalTime(weeklyTimeEntries),
       totalTime: calcTimeEntriesTotalTime(timeEntries)
     }

@@ -2,13 +2,5 @@
   <mat-expansion-panel-header>
     <mat-panel-title>{{ project.name }}</mat-panel-title>
   </mat-expansion-panel-header>
-  
-  <div *ngFor="let timeEntry of project.weeklyTimeEntries">
-    <span>{{ timeEntry.date | date:'dd/MM/yyyy' }}: </span>
-    <span>{{ timeEntry.time }} h</span>
-  </div>
-
-  <p>Weekly Total Time: {{ project.weeklyTotalTime }} h</p>
-  <p>Total time: {{ project.totalTime }} h</p>
-  <p>Other contributors: {{ project.userNames.join(', ') }}</p>
+  <project-display project="project"></project-display>
 </mat-expansion-panel>

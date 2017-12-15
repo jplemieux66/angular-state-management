@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectEffects } from './effects/project';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectsService } from './services/projects.service';
+import { ProjectDisplayComponent } from './components/project-display/project-display.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ProjectsService } from './services/projects.service';
   declarations: [
     ProjectsListComponent, 
     ProjectsPanelComponent,
-    WeekPickerComponent
+    WeekPickerComponent,
+    ProjectDisplayComponent
   ],
   exports: [
     ProjectsPanelComponent
