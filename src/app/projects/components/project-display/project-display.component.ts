@@ -26,6 +26,8 @@ export class ProjectDisplayComponent {
     }
   }
 
+  timeEntries: TimeEntryViewModel[] = [];
+
   constructor() { }
 
   updateTimeEntries() {
@@ -50,6 +52,10 @@ export class ProjectDisplayComponent {
       }
 
       curDate.add(1, 'd');
+
+      timeEntries.push(curTimeEntry);
     }
+
+    this.timeEntries = timeEntries;
   }
 }

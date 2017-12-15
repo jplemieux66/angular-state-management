@@ -14,12 +14,9 @@ import { LoadProjectsDetails } from '../../actions/project';
 })
 export class ProjectsPanelComponent {
   selectedWeekInfo$: Observable<WeekInfo>;
-  projectViewModels$: Observable<ProjectViewModel[]>
 
   constructor(private store: Store<fromProjects.State>) {
     this.selectedWeekInfo$ = this.store.select(fromProjects.getSelectedWeekInfo);
-
-    this.projectViewModels$ = this.store.select(fromProjects.getProjectViewModels);
 
     this.store.dispatch(new LoadProjectsDetails(1));
   }

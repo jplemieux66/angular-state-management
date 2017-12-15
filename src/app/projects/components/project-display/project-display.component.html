@@ -1,3 +1,12 @@
+<div *ngFor="let timeEntry of timeEntries">
+  <label>
+    {{timeEntry.date.toDate() | date:'EEEE'}}
+    <br>
+    {{timeEntry.date.toDate() | date:'(dd/MM/yyyy)'}}
+    <input>
+  </label>
+</div>
+
 <p>Weekly Total Time: {{ project.weeklyTotalTime }} h</p>
 <p>Total time: {{ project.totalTime }} h</p>
 <p>Other contributors: {{ project.userNames.join(', ') }}</p>
