@@ -1,6 +1,5 @@
 import { ProjectsDetails } from "../../../shared/model/user-projects-details";
 import * as project from '../actions/project';
-import { PROJECTS_DETAILS_LOADED } from "../actions/project";
 import { Project } from "../../../shared/model/project";
 import * as _ from 'lodash';
 import { TimeEntry } from "../../../shared/model/time-entry";
@@ -19,8 +18,42 @@ export function reducer(
   action: project.Actions
 ): State {
   switch(action.type) {
-    case PROJECTS_DETAILS_LOADED: {
+    case project.PROJECTS_DETAILS_LOADED: {
       return action.payload
+    }
+
+    case project.TIME_ENTRY_ADDED: {
+      let newTimeEntries = state.timeEntries.slice();
+      newTimeEntries.push(action.payload);
+
+      return {
+        ...state,
+        timeEntries: newTimeEntries
+      };
+    }
+
+    case project.TIME_ENTRY_UPDATED: {
+      const updatedTimeEntry = action.payload;
+      let newTimeEntries = state.timeEntries.slice();
+      const index = newTimeEntries.findIndex(timeEntry => timeEntry.id == updatedTimeEntry.id);
+      newTimeEntries[index] = updatedTimeEntry;
+
+      return {
+        ...state,
+        timeEntries: newTimeEntries
+      };
+    }
+
+    case project.TIME_ENTRY_DELETED: {
+      const deletedTimeEntryId = action.payload.id;
+      let newTimeEntries = state.timeEntries.slice();
+      const index = newTimeEntries.findIndex(timeEntry => timeEntry.id == deletedTimeEntryId);
+      newTimeEntries.splice(index, 1);
+
+      return {
+        ...state,
+        timeEntries: newTimeEntries
+      };
     }
 
     default: 

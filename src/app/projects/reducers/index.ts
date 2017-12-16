@@ -88,6 +88,7 @@ const filterTimeEntriesForProject = (timeEntries: TimeEntry[], project: Project)
 
 const mapTimeEntryToTimeEntryViewModel = (timeEntry: TimeEntry) => {
   return { 
+    id: timeEntry.id,
     date: moment(new Date(timeEntry.date)),
     time: timeEntry.time
   }

@@ -41,7 +41,7 @@ export class ProjectDisplayComponent {
   }
 
   updateTimeEntries() {
-    let curDate: Moment = this.selectedWeekInfo.startDate;
+    let curDate: Moment = this.selectedWeekInfo.startDate.clone();
     let timeEntries = [];
 
     while (curDate <= this.selectedWeekInfo.endDate) { 
@@ -57,6 +57,7 @@ export class ProjectDisplayComponent {
       // Else, we create a new empty time entry for display
       if (!curTimeEntry) {
         curTimeEntry = {
+          id: undefined,
           date: curDate.clone(),
           time: 0
         };
@@ -101,25 +102,23 @@ export class ProjectDisplayComponent {
         // Case: Add Time Entry
         if (inputTimeEntry.time == 0) {
           timeEntryChanges.push({
-            projectId: this.project.id,
-            date: inputTimeEntry.date,
             type: TimeEntryChangeType.Add,
+            date: inputTimeEntry.date,
+            projectId: this.project.id,
             newTime: control.value
           });
         }
         // Case: Delete Time Entry 
         else if (control.value == 0) {
           timeEntryChanges.push({
-            projectId: this.project.id,
-            date: inputTimeEntry.date,
+            timeEntryId: inputTimeEntry.id,
             type: TimeEntryChangeType.Delete
           });
         }
         // Case: Update Time Entry
         else {
           timeEntryChanges.push({
-            projectId: this.project.id,
-            date: inputTimeEntry.date,
+            timeEntryId: inputTimeEntry.id,
             type: TimeEntryChangeType.Update,
             newTime: control.value
           });

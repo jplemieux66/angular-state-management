@@ -12,6 +12,7 @@ import { ProjectEffects } from './effects/project';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectsService } from './services/projects.service';
 import { ProjectDisplayComponent } from './components/project-display/project-display.component';
+import { TimeEntriesService } from './services/time-entries.service';
 
 @NgModule({
   imports: [
@@ -31,6 +32,9 @@ import { ProjectDisplayComponent } from './components/project-display/project-di
   exports: [
     ProjectsPanelComponent
   ],
-  providers: [ ProjectsService ]
+  providers: [ 
+    ProjectsService,
+    TimeEntriesService
+  ]
 })
 export class ProjectsModule { }
