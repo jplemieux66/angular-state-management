@@ -7,10 +7,10 @@ body {
 }
 
 /* Angular Material Component styles */
-.mat-input-infix {
+week-picker .mat-input-infix {
   width: 0 !important;
 }
 
-.mat-input-underline {
+week-picker .mat-input-underline {
   display:none;
 }
