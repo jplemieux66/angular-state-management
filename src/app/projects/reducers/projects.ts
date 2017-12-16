@@ -1,7 +1,6 @@
 import { ProjectsDetails } from "../../../shared/model/user-projects-details";
 import * as project from '../actions/project';
 import { PROJECTS_DETAILS_LOADED } from "../actions/project";
-import { ProjectViewModel } from "../view-models/project.vm";
 import { Project } from "../../../shared/model/project";
 import * as _ from 'lodash';
 import { TimeEntry } from "../../../shared/model/time-entry";
