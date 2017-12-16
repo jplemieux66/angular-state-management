@@ -1,12 +1,17 @@
-<div *ngFor="let timeEntry of timeEntries">
-  <label>
-    {{timeEntry.date.toDate() | date:'EEEE'}}
-    <br>
-    {{timeEntry.date.toDate() | date:'(dd/MM/yyyy)'}}
-    <input>
-  </label>
-</div>
+<form [formGroup]="timeEntriesGroup" (ngSubmit)="submitTimeEntries()" class="time-entry-form">
+  <mat-form-field *ngFor="let timeEntry of timeEntries" class="time-entry">
+    <label>
+      <span class="date-day"><strong>{{timeEntry.date.toDate() | date:'EEE'}}</strong></span>
+      <br>
+      <span class="date-full">{{timeEntry.date.toDate() | date:'(dd/MM/yyyy)'}}</span>
+      <input [formControlName]="timeEntry.date.toString()" matInput type="number">
+    </label>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Save</button>
+</form>
 
-<p>Weekly Total Time: {{ project.weeklyTotalTime }} h</p>
-<p>Total time: {{ project.totalTime }} h</p>
-<p>Other contributors: {{ project.userNames.join(', ') }}</p>
+<p>Weekly Total Time: <strong>{{ weeklyTotalTime }} h</strong></p>
+<br>
+<div class="project-details">
+  <p>Other contributors: {{ project.userNames.join(', ') }}</p>
+</div>

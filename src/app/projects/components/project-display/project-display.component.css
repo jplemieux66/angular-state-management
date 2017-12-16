@@ -1,0 +1,22 @@
+.time-entry .date-full {
+  font-size: 10px;
+}
+
+.time-entry {
+  max-width: 60px;
+  margin: 8px;
+  text-align: center;
+}
+
+.time-entry input {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.time-entry-form button {
+  float: right;
+}
+
+.project-details {
+  font-size: 12px;
+}

@@ -4,6 +4,7 @@
   </mat-expansion-panel-header>
   <project-display 
     [project]="project"
-    [selectedWeekInfo]="selectedWeekInfo$ | async">
+    [selectedWeekInfo]="selectedWeekInfo$ | async"
+    (onTimeEntriesChanged)="timeEntriesChanged($event)">
   </project-display>
 </mat-expansion-panel>

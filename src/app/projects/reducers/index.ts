@@ -107,20 +107,20 @@ const filterUsersForProject = (users: User[], project: Project) => {
 const mapProjectsToProjectViewModels = 
   (projects: Project[], 
    projectsUsers: User[], 
-   weeklyTimeEntries: TimeEntry[], 
-   timeEntries: TimeEntry[]) => {
+   weeklyTimeEntries: TimeEntry[]) => {
 
      return projects.map((project) => {
 
        const filteredProjectUsers: User[] = filterUsersForProject(projectsUsers, project);
        const filteredWeeklyTimeEntries: TimeEntry[] = filterTimeEntriesForProject(weeklyTimeEntries, project);
-       const filteredTimeEntries: TimeEntry[] = filterTimeEntriesForProject(timeEntries, project);
 
-       return mapProjectToProjectViewModel(project, filteredProjectUsers, filteredWeeklyTimeEntries, filteredTimeEntries);
+       return mapProjectToProjectViewModel(project, filteredProjectUsers, filteredWeeklyTimeEntries);
 
      })
 
   }
+
+const getProjectId = (project: Project) => project.id;
 
 const getProjectName = (project: Project) => project.name;
 
@@ -128,29 +128,23 @@ const getUserNames = (users: User[]) => {
   return users.map(user => user.fullName);
 }
 
-const calcTimeEntriesTotalTime = (timeEntries: TimeEntry[]) => _.reduce(timeEntries, (acc, timeEntry) => acc + timeEntry.time, 0);
-
 const mapProjectToProjectViewModel = 
   (project: Project,
    projectUsers: User[],
-   weeklyTimeEntries: TimeEntry[],
-   timeEntries:TimeEntry[]) => {
+   weeklyTimeEntries: TimeEntry[]) => {
 
     const projectViewModel: ProjectViewModel = {
+      id: getProjectId(project),
       name: getProjectName(project),
       userNames: getUserNames(projectUsers),
-      weeklyTimeEntries: mapTimeEntriesToTimeEntryViewModels(weeklyTimeEntries),
-      weeklyTotalTime: calcTimeEntriesTotalTime(weeklyTimeEntries),
-      totalTime: calcTimeEntriesTotalTime(timeEntries)
+      weeklyTimeEntries: mapTimeEntriesToTimeEntryViewModels(weeklyTimeEntries)
     }
     return projectViewModel;
-
   }
 
 export const getProjectViewModels = createSelector(
   getProjects,
   getProjectsUsers,
   getFilteredTimeEntriesForWeek,
-  getTimeEntries,
   mapProjectsToProjectViewModels
 )
