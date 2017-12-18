@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './core/components/app/app.component';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [],
@@ -18,9 +20,14 @@ import { AppComponent } from './core/components/app/app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    CoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
-    CoreModule
+    !environment.production
+      ? StoreDevtoolsModule.instrument({
+        name: 'Angular State Management Tutorial: Projects'
+      })
+      : [],
   ],
   providers: [],
   bootstrap: [AppComponent]
