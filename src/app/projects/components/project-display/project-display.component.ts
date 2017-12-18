@@ -3,7 +3,7 @@ import { WeekInfo } from '../../../../shared/model/week-info.model';
 import { ProjectViewModel } from '../../view-models/project.vm';
 import { Moment } from 'moment';
 import { TimeEntryViewModel } from '../../view-models/time-entry.vm';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TimeEntryChange, TimeEntryChangeType } from './time-entry-change.model';
 
 @Component({
@@ -40,6 +40,14 @@ export class ProjectDisplayComponent {
     this.updateWeeklyTotalTime = this.updateWeeklyTotalTime.bind(this);
   }
 
+  validateTimeEntry(control: FormControl) {
+    return control.value >= 0 && control.value <= 24 ? null : {
+      validateTimeEntry: {
+        valid: false
+      }
+    };
+  }
+
   updateTimeEntries() {
     let curDate: Moment = this.selectedWeekInfo.startDate.clone();
     let timeEntries = [];
@@ -67,7 +75,7 @@ export class ProjectDisplayComponent {
 
       // Create a FormControl
       const formControlKey: string = curTimeEntry.date.toString();
-      const formControl: FormControl = new FormControl(formControlKey)
+      const formControl: FormControl = new FormControl(formControlKey, this.validateTimeEntry)
       formControl.setValue(curTimeEntry.time);
       formControl.valueChanges.subscribe((this.updateWeeklyTotalTime));
 

@@ -4,10 +4,13 @@
       <span class="date-day"><strong>{{timeEntry.date.toDate() | date:'EEE'}}</strong></span>
       <br>
       <span class="date-full">{{timeEntry.date.toDate() | date:'(dd/MM/yyyy)'}}</span>
-      <input [formControlName]="timeEntry.date.toString()" matInput type="number">
+      <input matInput type="number" min="0" max="24" [formControlName]="timeEntry.date.toString()">
     </label>
+    <mat-error *ngIf="!timeEntriesGroup.get(timeEntry.date.toString()).valid">
+      Invalid
+    </mat-error>
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!timeEntriesGroup.valid">Save</button>
 </form>
 
 <p>Weekly Total Time: <strong>{{ weeklyTotalTime }} h</strong></p>
