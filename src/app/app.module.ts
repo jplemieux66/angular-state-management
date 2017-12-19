@@ -24,9 +24,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
     !environment.production
-      ? StoreDevtoolsModule.instrument({
-        name: 'Angular State Management Tutorial: Projects'
-      })
+      ? StoreDevtoolsModule.instrument()
       : [],
   ],
   providers: [],
