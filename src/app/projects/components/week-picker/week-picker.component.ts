@@ -10,12 +10,23 @@ import { WeekInfo } from '../../../../shared/model/week-info.model';
   templateUrl: './week-picker.component.html',
   styleUrls: ['./week-picker.component.scss']
 })
-export class WeekPickerComponent implements OnChanges {
+export class WeekPickerComponent {
   selectedDate: FormControl = new FormControl();
 
   currentWeekDisplay: string = "Choose a week";
 
-  @Input() currentlySelectedWeek: WeekInfo;
+  // currentlySelectedWeek
+  _currentlySelectedWeek: WeekInfo;
+
+  get currentlySelectedWeek(): WeekInfo {
+    return this._currentlySelectedWeek;
+  }
+
+  @Input('currentlySelectedWeek')
+  set currentlySelectedWeek(value: WeekInfo) {
+    this._currentlySelectedWeek = value;
+    this.updateSelectedWeek();
+  }
 
   @Output() onWeekSelectedChanged: EventEmitter<WeekInfo> = new EventEmitter<WeekInfo>();
 
@@ -34,20 +45,24 @@ export class WeekPickerComponent implements OnChanges {
       endDate: weekEndDate
     }
     this.onWeekSelectedChanged.emit(selectedWeek);
-
-    // Change current week display
-    this.currentWeekDisplay = `Current week: ${weekStartDate.format('DD/M/YYYY')} to ${weekEndDate.format('DD/M/YYYY')}`;
-  }
-
-  ngOnChanges() {
-    if (this.currentlySelectedWeek != this.previouslySelectedWeek) {
-      this.selectedDate.setValue(this.currentlySelectedWeek.startDate);
-      this.previouslySelectedWeek = this.currentlySelectedWeek;
-    }
   }
 
   firstWeekDayOnlyFilter = (m: Moment): boolean => {
     const day = m.day();
     return day == 0;
+  }
+
+  updateSelectedWeek() {
+    if (this.currentlySelectedWeek != this.previouslySelectedWeek) {
+      this.previouslySelectedWeek = this.currentlySelectedWeek;
+
+      const weekStartDate = this.currentlySelectedWeek.startDate;
+      const weekEndDate = this.currentlySelectedWeek.endDate;
+
+      this.selectedDate.setValue(weekStartDate);
+
+      // Change current week display
+      this.currentWeekDisplay = `Current week: ${weekStartDate.format('DD/M/YYYY')} to ${weekEndDate.format('DD/M/YYYY')}`;
+    }
   }
 }
