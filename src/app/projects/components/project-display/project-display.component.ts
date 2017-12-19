@@ -12,6 +12,7 @@ import { TimeEntryChange, TimeEntryChangeType } from './time-entry-change.model'
   styleUrls: ['./project-display.component.css']
 })
 export class ProjectDisplayComponent {
+
   @Input() project: ProjectViewModel;
 
   private _selectedWeekInfo: WeekInfo;
@@ -57,7 +58,7 @@ export class ProjectDisplayComponent {
       let curTimeEntry: TimeEntryViewModel;
       // If there is a time entry at the specified date for this project, we take it
       this.project.weeklyTimeEntries.forEach((timeEntry) => {
-        if (timeEntry.date.isSame(curDate)) {
+        if (timeEntry.date.startOf('day').isSame(curDate.startOf('day'))) {
           curTimeEntry = timeEntry;
         }
       });
@@ -106,31 +107,34 @@ export class ProjectDisplayComponent {
 
       // Else, verify if the new value is different from the value received initially
       const inputTimeEntry = this.timeEntries.find(timeEntry => timeEntry.date.toString() == key);
-      if(inputTimeEntry.time != control.value) {
-        // Case: Add Time Entry
-        if (inputTimeEntry.time == 0) {
-          timeEntryChanges.push({
-            type: TimeEntryChangeType.Add,
-            date: inputTimeEntry.date,
-            projectId: this.project.id,
-            newTime: control.value
-          });
-        }
-        // Case: Delete Time Entry 
-        else if (control.value == 0) {
-          timeEntryChanges.push({
-            timeEntryId: inputTimeEntry.id,
-            type: TimeEntryChangeType.Delete
-          });
-        }
-        // Case: Update Time Entry
-        else {
-          timeEntryChanges.push({
-            timeEntryId: inputTimeEntry.id,
-            type: TimeEntryChangeType.Update,
-            newTime: control.value
-          });
-        }
+
+      if (inputTimeEntry.time == control.value) {
+        return;
+      }
+
+      // Case: Add Time Entry
+      if (inputTimeEntry.time == 0) {
+        timeEntryChanges.push({
+          type: TimeEntryChangeType.Add,
+          date: inputTimeEntry.date,
+          projectId: this.project.id,
+          newTime: control.value
+        });
+      }
+      // Case: Delete Time Entry 
+      else if (control.value == 0) {
+        timeEntryChanges.push({
+          timeEntryId: inputTimeEntry.id,
+          type: TimeEntryChangeType.Delete
+        });
+      }
+      // Case: Update Time Entry
+      else {
+        timeEntryChanges.push({
+          timeEntryId: inputTimeEntry.id,
+          type: TimeEntryChangeType.Update,
+          newTime: control.value
+        });
       }
     });
 
