@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --proxy-config proxy.config.json",
+    "start": "concurrently --kill-others \"npm run serve-ui\" \"npm run api-server\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "serve-ui": "ng serve --open --proxy-config proxy.config.json",
     "api-server": "./node_modules/.bin/ts-node ./src/server/server.ts"
   },
   "private": true,
@@ -28,6 +29,7 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^4.1.1",
     "@ngrx/store": "^4.1.1",
+    "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
     "moment": "^2.19.3",
@@ -36,7 +38,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.5.0",
+    "@angular/cli": "^1.6.0",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
     "@ngrx/store-devtools": "^4.1.1",
