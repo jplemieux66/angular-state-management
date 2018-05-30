@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import * as date from '../actions/date';
+import * as date from '../actions/dates';
 import { WeekInfo } from './../../../shared/model/week-info.model';
 
 export interface State {
