@@ -1,22 +1,19 @@
-import { ProjectsDetails } from "../../../shared/model/user-projects-details";
-import * as fromRoot from '../../reducers';
-import * as fromProjects from './projects';
-import * as fromDates from './dates';
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { TimeEntry } from "../../../shared/model/time-entry";
-import { Project } from "../../../shared/model/project";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as _ from 'lodash';
-import { WeekInfo } from "../../../shared/model/week-info.model";
-import { memoize } from "@ngrx/store/src/selector";
-import { User } from "../../../shared/model/user";
-import { ProjectViewModel } from "../view-models/project.vm";
 import * as moment from 'moment';
-import { TimeEntryViewModel } from "../view-models/time-entry.vm";
 
+import { Project } from '../../../shared/model/project';
+import { TimeEntry } from '../../../shared/model/time-entry';
+import { User } from '../../../shared/model/user';
+import { WeekInfo } from '../../../shared/model/week-info.model';
+import * as fromRoot from '../../reducers';
+import { ProjectViewModel } from '../view-models/project.vm';
+import * as fromDates from './dates';
+import * as fromProjects from './projects';
 
 export interface ProjectsState {
-  dates: fromDates.State,
-  projects: fromProjects.State
+  dates: fromDates.State;
+  projects: fromProjects.State;
 }
 
 export interface State extends fromRoot.State {
